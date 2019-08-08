@@ -2,12 +2,14 @@ import requests
 import json
 import os
 
+from env import AUTH_URL
+
 logged_in = False
 
 def auth():
     try:
+        url = os.environ['AUTH_URL'] = AUTH_URL
         print(os.environ['AUTH_URL'])
-        url = os.environ['AUTH_URL']
     except KeyError:
         print("AUTH_URL environment variable is not set")
     username = input("Enter your username: ")
