@@ -1,11 +1,20 @@
+import requests
+import json
+import os
+
 logged_in = False
 
 def auth():
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
-        global logged_in
-        if username == 'test':
-            logged_in = True
+    try:
+        print(os.environ['AUTH_URL'])
+        url = os.environ['AUTH_URL']
+    except KeyError:
+        print("AUTH_URL environment variable is not set")
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    global logged_in
+    if username == 'test':
+        logged_in = True
 
 def app():
     while True:
