@@ -9,14 +9,26 @@ logged_in = False
 def auth():
     try:
         url = os.environ['AUTH_URL'] = AUTH_URL
-        print(os.environ['AUTH_URL'])
     except KeyError:
         print("AUTH_URL environment variable is not set")
     username = input("Enter your username: ")
     password = input("Enter your password: ")
+    
+    headers = {"content-type": "application/json"}
+
+    body = {
+        "username": username,
+        "password": password
+    }
+
+    response = requests.post(url, json=body, headers=headers).json()
+
+    print(response)
     global logged_in
-    if username == 'test':
+    if response["username"]:
         logged_in = True
+    else:
+        print("Invalid credentials")
 
 def app():
     while True:
